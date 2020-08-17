@@ -1,39 +1,31 @@
 'use strict';
 
-function getDogImage() {
-  fetch('https://dog.ceo/api/breeds/image/random/3')
-    .then(response => response.json())
-    .then(responseJson =>
-      displayResults(responseJson))
-    .catch(errorMessage);
+function getDogImage( number ) {
+  fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
+    .then( response => response.json() )
+    .then( responseJson => 
+      displayResults( responseJson ) )
+    .catch( error => alert( 'Something went wrong. Try again later.' ));
 }
 
 function displayResults(responseJson) {
-  console.log(responseJson.message);
-  $('.results-img').replaceWith(
-    `<img src="${responseJson.message}" class="results-img">`
-  )
-  $('.results').removeClass('hidden');
-}
-
-function validateResponse(response) {
-  if (!response.ok) {
-    throw Error();
+  console.log(responseJson);
+  let imagesArray=responseJson.message;
+  console.log(imagesArray);
+  let content="";
+  for(let i=0; i<imagesArray.length;i++) {
+    content += `<img src="${imagesArray[i]}" class="results-img"/>`;
   }
-  return response.json();
+  $('section').removeClass('hidden');
+  $('.results').html(content);
 }
 
 function watchForm() {
-  $('form').submit(event => {
+  $('.container').on("submit", ".results-form", event => {
     event.preventDefault();
-    $(".results").empty();
-    let number = $("#userInput").val();
-      getDogImage(number);
-  });
-}
-
-function errorMessage(message) {
-  $('.results').append(`<p>Something went wrong!  Please try again.</p>`);
+    let number = $('#number').val();
+    getDogImage(number);
+  })
 }
 
 $(function() {
