@@ -1,42 +1,25 @@
-'use strict';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Random Dog API Assignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Random Dog Generator</h1>
 
-function getDogImage() {
-  fetch('https://dog.ceo/api/breeds/image/random/3')
-    .then(response => response.json())
-    .then(responseJson =>
-      displayResults(responseJson))
-    .catch(errorMessage);
-}
-
-function displayResults(responseJson) {
-  console.log(responseJson.message);
-  $('.results-img').replaceWith(
-    `<img src="${responseJson.message}" class="results-img">`
-  )
-  $('.results').removeClass('hidden');
-}
-
-function validateResponse(response) {
-  if (!response.ok) {
-    throw Error();
-  }
-  return response.json();
-}
-
-function watchForm() {
-  $('form').submit(event => {
-    event.preventDefault();
-    $(".results").empty();
-    let number = $("#userInput").val();
-      getDogImage(number);
-  });
-}
-
-function errorMessage(message) {
-  $('.results').append(`<p>Something went wrong!  Please try again.</p>`);
-}
-
-$(function() {
-  console.log('App loaded! Waiting for submit!');
-  watchForm();
-});
+        <form>
+            <label for="userInput">Input between 1 and 50: </label>
+            <input id="userInput" type="number" name="userInput" min="1" max="50" value="3">
+            <input type="submit" value="Get your dog pictures!">
+        </form>
+        <section class="results"></section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+    
+</body>
+</html>
