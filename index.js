@@ -2,16 +2,18 @@
 
 function getDogImage() {
   fetch('https://dog.ceo/api/breeds/image/random/3')
-    .then(response => validateResponse(response))
-    .then(responseJson => displayResults(responseJson))
+    .then(response => response.json())
+    .then(responseJson =>
+      displayResults(responseJson))
     .catch(errorMessage);
 }
 
 function displayResults(responseJson) {
   console.log(responseJson.message);
-  $('.results').append(
+  $('.results-img').replaceWith(
     `<img src="${responseJson.message}" class="results-img">`
   )
+  $('.results').removeClass('hidden');
 }
 
 function validateResponse(response) {
@@ -31,7 +33,7 @@ function watchForm() {
 }
 
 function errorMessage(message) {
-  $('.results').append(`<p>Something went wrong!  Are you sure you entered a number between 1 and 50?</p>`);
+  $('.results').append(`<p>Something went wrong!  Please try again.</p>`);
 }
 
 $(function() {
