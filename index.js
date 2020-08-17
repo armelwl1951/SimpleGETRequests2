@@ -32,14 +32,6 @@ function watchForm() {
   });
 }
 
-function empty() {
-  var x;
-  x = document.getElementById("roll-input").nodeValue;
-  if (x =="") {
-    return false;
-  };
-}
-
 function errorMessage(message) {
   $('.results').append(`<p>Something went wrong!  Please try again.</p>`);
 }
