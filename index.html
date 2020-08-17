@@ -11,12 +11,15 @@
     <div class="container">
         <h1>Random Dog Generator</h1>
 
-        <form>
-            <label for="userInput">Input between 1 and 50: </label>
-            <input id="userInput" type="number" name="userInput" min="1" max="50" value="3">
-            <input type="submit" value="Get your dog pictures!">
-        </form>
-        <section class="results"></section>
+        <form action="" method="get" class="results-form">
+            <div class="results-form">
+                <label for="number">Input between 1 and 50: </label>
+                <input id="number" type="number" name="number" min="1" max="50" value="3" required>
+                <input type="submit" value="Get your dog pictures!">
+            </div>
+        <section class="results-section hidden">
+            <div class="results results-img"></div>
+        </section>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="index.js"></script>
